@@ -32,4 +32,7 @@ public class ParkingLotSystem {
         return false;
     }
 
+    public boolean isLotFull() {
+        return this.vehicle != null;
+    }
 }

@@ -51,4 +51,10 @@ public class ParkingLotTest {
 
     }
 
+    @Test
+    void givenAQuery_WhenParkingLotIsFull_ShouldInformOwner() throws ParkingLotException {
+        parkingLotSystem.park(vehicle);
+        boolean informOwner = parkingLotSystem.isLotFull();
+        Assertions.assertTrue(informOwner);
+    }
 }
