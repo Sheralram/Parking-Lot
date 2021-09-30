@@ -6,19 +6,30 @@ public class ParkingLotSystem {
     }
 
 
-    public boolean park(Object vehicle) {
+    public void park(Object vehicle) throws ParkingLotException {
        if(this.vehicle != null)
-           return false;
+           throw new ParkingLotException("Parking Lot is FULL");
         this.vehicle = vehicle;
-        return  true;
     }
 
-    public boolean unpark(Object vehicle) {
-        if(vehicle == null) return false;
+    public boolean isVehicleParked(Object vehicle) {
+        if(this.vehicle.equals(vehicle))
+            return true;
+        return false;
+    }
+
+    public void unpark(Object vehicle) throws ParkingLotException {
+        if(vehicle == null)
+            throw new ParkingLotException("Vechile To Be Parked To Unpark.Unpark Is Not Possible");
         if(this.vehicle.equals(vehicle)) {
             this.vehicle = null;
-            return true;
         }
-            return false;
     }
+
+    public boolean isVehicleUnparked(Object vehicle){
+        if(this.vehicle == null)
+            return true;
+        return false;
+    }
+
 }

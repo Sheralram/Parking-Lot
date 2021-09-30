@@ -3,33 +3,52 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class ParkingLotTest {
-    ParkingLotSystem parkingLotSystem = null;
-    Object vehicle = null;
+    ParkingLotSystem parkingLotSystem;
+    Object vehicle;
 
     @BeforeEach
     void setUp() {
-        ParkingLotSystem parkingLotSystem = new ParkingLotSystem();
+        parkingLotSystem = new ParkingLotSystem();
         vehicle = new Object();
     }
 
     @Test
     void givenAVehicle_WhenParked_ShouldReturnTrue() {
-        boolean isParked = parkingLotSystem.park(new Object());
-        Assertions.assertTrue(isParked);
+        try {
+            parkingLotSystem.park(vehicle);
+            boolean isParked = parkingLotSystem.isVehicleParked(vehicle);
+            Assertions.assertTrue(isParked);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
+
     }
 
     @Test
-    void givenAVehicle_WhenUnParked_ShouldReturnTrue() {
-        parkingLotSystem.park(vehicle);
-        boolean isUnparked = parkingLotSystem.unpark( vehicle);
-        Assertions.assertTrue(isUnparked);
+    void givenAVehicle_WhenUnParked_ShouldReturnTrue()  {
+        try {
+            parkingLotSystem.park(vehicle);
+            boolean park = parkingLotSystem.isVehicleParked(vehicle);
+            parkingLotSystem.unpark(vehicle);
+            boolean unpark = parkingLotSystem.isVehicleUnparked(vehicle);
+            Assertions.assertEquals(park, unpark);
+        } catch (ParkingLotException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
     void givenAVehicle_WhenAlreadyParked_ShouldReturnTrue() {
-       parkingLotSystem.park(vehicle);
-        boolean isParked = parkingLotSystem.park(new Object());
-        Assertions.assertFalse(isParked);
+        try {
+            parkingLotSystem.park(vehicle);
+            parkingLotSystem.isVehicleParked(vehicle);
+            parkingLotSystem.park(vehicle);
+            parkingLotSystem.isVehicleParked(vehicle);
+        } catch (ParkingLotException e) {
+            Assertions.assertEquals("Parking Lot is FULL", e.getMessage());
+            e.printStackTrace();
+        }
+
     }
 
 }
