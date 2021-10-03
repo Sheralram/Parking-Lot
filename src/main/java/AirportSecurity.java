@@ -1,4 +1,5 @@
-public class ParkingLotOwner implements  ParkingLotObserver {
+
+public class AirportSecurity implements  ParkingLotObserver {
     private boolean isFullCapacity;
 
     public void capacityIsFull() {
@@ -6,5 +7,6 @@ public class ParkingLotOwner implements  ParkingLotObserver {
     }
 
     public boolean isCapacityFull() {
-    return this.isFullCapacity;}
+        return this.isFullCapacity;
+    }
 }
